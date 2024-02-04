@@ -97,6 +97,12 @@
       thisProduct.priceElem = thisProduct.element.querySelector(
         select.menuProduct.priceElem
       );
+      thisProduct.imageWrapper = thisProduct.element.querySelector(
+        select.menuProduct.imageWrapper
+      );
+      // thisProduct.imagesVisible = thisProduct.element.querySelectorAll(
+      //   select.menuProduct.imageVisible
+      // );
     }
 
     initAccordion() {
@@ -171,18 +177,40 @@
         for (let optionId in param.options) {
           const option = param.options[optionId];
 
-          // modify price if default was removed or non-defualt was added
+          const image = thisProduct.imageWrapper.querySelector(
+            `.${paramId}-${optionId}`
+          );
+          // console.log('thisProduct.imageWrapper', thisProduct.imageWrapper);
+          console.log(`image .${paramId}-${optionId}`, image);
+
+          // modify price if default was removed or non-default was added
+          if (image) {
+            if (option.default === true) {
+              image.classList.add('active');
+            } else {
+              image.classList.remove('active');
+            }
+          }
+
           if (
             option.default === true &&
             selectedParamOptions.indexOf(optionId) === -1
           ) {
             price = price - option.price;
+
+            if (image) {
+              image.classList.remove('active');
+            }
           }
           if (
             (option.default === undefined || option.default === false) &
             (selectedParamOptions.indexOf(optionId) !== -1)
           ) {
             price = price + option.price;
+
+            if (image) {
+              image.classList.add('active');
+            }
           }
         }
       }

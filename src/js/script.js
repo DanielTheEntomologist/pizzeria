@@ -156,9 +156,39 @@
     }
     processOrder() {
       const thisProduct = this;
-      console.log('processOrder:', thisProduct);
       const formData = utils.serializeFormToObject(thisProduct.form);
-      console.log('formData:', formData);
+
+      let price = thisProduct.data.price;
+
+      // for each customizable parameter in product
+      for (let paramId in thisProduct.data.params) {
+        const param = thisProduct.data.params[paramId];
+
+        const selectedParamOptions = formData[paramId];
+        // console.log(selectedParamOptions);
+
+        // for each option in parameter
+        for (let optionId in param.options) {
+          const option = param.options[optionId];
+
+          // modify price if default was removed or non-defualt was added
+          if (
+            option.default === true &&
+            selectedParamOptions.indexOf(optionId) === -1
+          ) {
+            price = price - option.price;
+          }
+          if (
+            (option.default === undefined || option.default === false) &
+            (selectedParamOptions.indexOf(optionId) !== -1)
+          ) {
+            price = price + option.price;
+          }
+        }
+      }
+
+      const amount = Number(formData.amount[0]);
+      thisProduct.priceElem.innerHTML = price * amount;
     }
   }
 

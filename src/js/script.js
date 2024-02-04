@@ -108,13 +108,17 @@
     initAccordion() {
       const thisProduct = this;
 
-      thisProduct.element.classList.remove('active');
+      thisProduct.element.classList.remove(
+        classNames.menuProduct.wrapperActive
+      );
 
       const allProducts = document.querySelectorAll(select.all.menuProducts);
 
       for (let product in allProducts) {
         if (product.element !== undefined)
-          product.element.classList.remove('active');
+          product.element.classList.remove(
+            classNames.menuProduct.wrapperActive
+          );
       }
 
       const clickableTrigger = thisProduct.accordionTrigger;
@@ -136,10 +140,12 @@
           productElement !== thisProduct.element &&
           productElement !== undefined
         ) {
-          productElement.classList.remove('active');
+          productElement.classList.remove(classNames.menuProduct.wrapperActive);
         }
       }
-      thisProduct.element.classList.toggle('active');
+      thisProduct.element.classList.toggle(
+        classNames.menuProduct.wrapperActive
+      );
     }
 
     initOrderForm() {
@@ -173,35 +179,36 @@
         const param = thisProduct.data.params[paramId];
 
         const selectedParamOptions = formData[paramId];
-        // console.log(selectedParamOptions);
 
         // for each option in parameter
         for (let optionId in param.options) {
           const option = param.options[optionId];
 
-          const image = thisProduct.imageWrapper.querySelector(
+          const optionImage = thisProduct.imageWrapper.querySelector(
             `.${paramId}-${optionId}`
           );
-          // console.log('thisProduct.imageWrapper', thisProduct.imageWrapper);
-          console.log(`image .${paramId}-${optionId}`, image);
 
-          // modify price if default was removed or non-default was added
-          if (image) {
+          console.log(`image .${paramId}-${optionId}`, optionImage);
+
+          // reset display to default options
+          if (optionImage) {
             if (option.default === true) {
-              image.classList.add('active');
+              optionImage.classList.add(classNames.menuProduct.imageVisible);
             } else {
-              image.classList.remove('active');
+              optionImage.classList.remove(classNames.menuProduct.imageVisible);
             }
           }
 
+          // modify price if default was removed or non-default was added
           if (
             option.default === true &&
             selectedParamOptions.indexOf(optionId) === -1
           ) {
             price = price - option.price;
 
-            if (image) {
-              image.classList.remove('active');
+            // remove option to display
+            if (optionImage) {
+              optionImage.classList.remove(classNames.menuProduct.imageVisible);
             }
           }
           if (
@@ -210,8 +217,9 @@
           ) {
             price = price + option.price;
 
-            if (image) {
-              image.classList.add('active');
+            // add option to display
+            if (optionImage) {
+              optionImage.classList.add(classNames.menuProduct.imageVisible);
             }
           }
         }

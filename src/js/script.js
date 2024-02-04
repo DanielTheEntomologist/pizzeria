@@ -74,7 +74,52 @@
       // add element to menu
       menuContainer.insertAdjacentElement('beforeend', thisProduct.element);
 
+      thisProduct.getElements();
       thisProduct.initAccordion();
+      thisProduct.initOrderForm();
+    }
+
+    getElements() {
+      const thisProduct = this;
+
+      thisProduct.accordionTrigger = thisProduct.element.querySelector(
+        select.menuProduct.clickable
+      );
+      thisProduct.form = thisProduct.element.querySelector(
+        select.menuProduct.form
+      );
+      thisProduct.formInputs = thisProduct.form.querySelectorAll(
+        select.all.formInputs
+      );
+      thisProduct.cartButton = thisProduct.element.querySelector(
+        select.menuProduct.cartButton
+      );
+      thisProduct.priceElem = thisProduct.element.querySelector(
+        select.menuProduct.priceElem
+      );
+    }
+
+    initAccordion() {
+      const thisProduct = this;
+
+      thisProduct.element.classList.remove('active');
+
+      const allProducts = document.querySelectorAll(select.all.menuProducts);
+
+      for (let product in allProducts) {
+        if (product.element !== undefined)
+          product.element.classList.remove('active');
+      }
+
+      const clickableTrigger = thisProduct.accordionTrigger;
+
+      clickableTrigger.addEventListener('click', function (event) {
+        // prevent default action for event
+        event.preventDefault();
+        // toggle active class on element of thisProduct
+        thisProduct.toggleAccordion();
+      });
+      // on
     }
 
     toggleAccordion() {
@@ -91,29 +136,29 @@
       thisProduct.element.classList.toggle('active');
     }
 
-    initAccordion() {
+    initOrderForm() {
       const thisProduct = this;
 
-      thisProduct.element.classList.remove('active');
-
-      const allProducts = document.querySelectorAll(select.all.menuProducts);
-
-      for (let product in allProducts) {
-        if (product.element !== undefined)
-          product.element.classList.remove('active');
-      }
-
-      const clickableTrigger = thisProduct.element.querySelector(
-        select.menuProduct.clickable
-      );
-
-      clickableTrigger.addEventListener('click', function (event) {
-        // prevent default action for event
+      thisProduct.form.addEventListener('submit', function (event) {
         event.preventDefault();
-        // toggle active class on element of thisProduct
-        thisProduct.toggleAccordion();
+        thisProduct.processOrder();
       });
-      // on
+
+      for (let select of thisProduct.formInputs) {
+        select.addEventListener('change', function () {
+          thisProduct.processOrder();
+        });
+      }
+      thisProduct.cartButton.addEventListener('click', function (event) {
+        event.preventDefault();
+        thisProduct.processOrder();
+      });
+    }
+    processOrder() {
+      const thisProduct = this;
+      console.log('processOrder:', thisProduct);
+      const formData = utils.serializeFormToObject(thisProduct.form);
+      console.log('formData:', formData);
     }
   }
 

@@ -162,7 +162,7 @@
       });
 
       for (let select of thisProduct.formInputs) {
-        select.addEventListener('change', function (event) {
+        select.addEventListener('change', function () {
           thisProduct.processOrder();
         });
       }
@@ -236,12 +236,9 @@
     initAmountWidget() {
       const thisProduct = this;
       thisProduct.amountWidget = new AmountWidget(thisProduct.amountWidgetElem);
-      thisProduct.amountWidgetElem.addEventListener(
-        'updated',
-        function (event) {
-          thisProduct.processOrder();
-        }
-      );
+      thisProduct.amountWidgetElem.addEventListener('updated', function () {
+        thisProduct.processOrder();
+      });
     }
   }
 

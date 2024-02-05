@@ -286,21 +286,22 @@
     constructor(amountElement) {
       const thisWidget = this;
       thisWidget.value = settings.amountWidget.defaultValue;
+      thisWidget.dom = {};
       thisWidget.getElements(amountElement);
-      thisWidget.setValue(thisWidget.inputElement.value);
+      thisWidget.setValue(thisWidget.dom.inputElement.value);
       thisWidget.initActions();
       // console.log('AmountWidget:', thisWidget);
     }
     getElements(element) {
       const thisWidget = this;
-      thisWidget.element = element;
-      thisWidget.increaseButton = thisWidget.element.querySelector(
+      thisWidget.dom.element = element;
+      thisWidget.dom.increaseButton = thisWidget.dom.element.querySelector(
         select.widgets.amount.linkIncrease
       );
-      thisWidget.decreaseButton = thisWidget.element.querySelector(
+      thisWidget.dom.decreaseButton = thisWidget.dom.element.querySelector(
         select.widgets.amount.linkDecrease
       );
-      thisWidget.inputElement = thisWidget.element.querySelector(
+      thisWidget.dom.inputElement = thisWidget.dom.element.querySelector(
         select.widgets.amount.input
       );
     }
@@ -315,23 +316,23 @@
         newValue <= settings.amountWidget.defaultMax
       ) {
         thisWidget.value = newValue;
-        thisWidget.inputElement.value = thisWidget.value;
+        thisWidget.dom.inputElement.value = thisWidget.value;
         thisWidget.announce();
       } else {
-        thisWidget.inputElement.value = thisWidget.value;
+        thisWidget.dom.inputElement.value = thisWidget.value;
       }
     }
     initActions() {
       const thisWidget = this;
-      thisWidget.inputElement.addEventListener('change', function (event) {
+      thisWidget.dom.inputElement.addEventListener('change', function (event) {
         event.preventDefault();
         thisWidget.setValue(thisWidget.inputElement.value);
       });
-      thisWidget.increaseButton.addEventListener('click', function (event) {
+      thisWidget.dom.increaseButton.addEventListener('click', function (event) {
         event.preventDefault();
         thisWidget.setValue(thisWidget.value + 1);
       });
-      thisWidget.decreaseButton.addEventListener('click', function (event) {
+      thisWidget.dom.decreaseButton.addEventListener('click', function (event) {
         event.preventDefault();
         thisWidget.setValue(thisWidget.value - 1);
       });
@@ -341,7 +342,7 @@
       const event = new CustomEvent('updated', {
         bubbles: true,
       });
-      thisWidget.element.dispatchEvent(event);
+      thisWidget.dom.element.dispatchEvent(event);
     }
   }
 

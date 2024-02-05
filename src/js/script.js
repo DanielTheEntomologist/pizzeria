@@ -346,6 +346,39 @@
     }
   }
 
+  class Cart {
+    constructor(element) {
+      const thisCart = this;
+      thisCart.products = [];
+      thisCart.deliveryFee = settings.cart.defaultDeliveryFee;
+      thisCart.dom = {};
+      thisCart.getElements(element);
+      thisCart.initActions();
+      console.log('new Cart:', thisCart);
+    }
+
+    getElements(element) {
+      const thisCart = this;
+      thisCart.dom.wrapper = element;
+      thisCart.dom.toggleTrigger = thisCart.dom.wrapper.querySelector(
+        select.cart.toggleTrigger
+      );
+    }
+
+    toggleCart() {
+      const thisCart = this;
+      thisCart.dom.wrapper.classList.toggle(classNames.cart.wrapperActive);
+    }
+
+    initActions() {
+      const thisCart = this;
+      thisCart.dom.toggleTrigger.addEventListener('click', function (event) {
+        event.preventDefault();
+        thisCart.toggleCart();
+      });
+    }
+  }
+
   const app = {
     initData: function () {
       const thisApp = this;
@@ -362,7 +395,11 @@
       console.log('thisApp.products:', thisApp.products);
     },
 
-    initMenu: function () {},
+    initCart() {
+      const thisApp = this;
+      const cartElem = document.querySelector(select.containerOf.cart);
+      thisApp.cart = new Cart(cartElem);
+    },
 
     init: function () {
       const thisApp = this;
@@ -373,7 +410,8 @@
       console.log('templates:', templates);
 
       thisApp.initData();
-      thisApp.initMenu();
+
+      thisApp.initCart();
     },
   };
 

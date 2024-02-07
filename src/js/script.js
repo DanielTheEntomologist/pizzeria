@@ -413,8 +413,22 @@
     }
 
     add(menuProduct) {
-      //const thisCart = this;
+      const thisCart = this;
       console.log('adding product:', menuProduct);
+      // get template for cartProduct
+      const generatedHTML = templates.cartProduct(menuProduct);
+      console.log('generatedHTML:', generatedHTML);
+      // create DOM element from template
+      const generatedDOM = utils.createDOMFromHTML(generatedHTML);
+
+      // add element to cart
+
+      const cartContainer = document.querySelector(select.cart.productList);
+      cartContainer.insertAdjacentElement('beforeend', generatedDOM);
+
+      thisCart.dom.productList = cartContainer.querySelector(
+        select.cart.productList
+      );
     }
 
     initActions() {

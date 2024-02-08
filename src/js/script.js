@@ -76,7 +76,11 @@
     cart: {
       defaultDeliveryFee: 20,
     },
-    // CODE ADDED END
+    db: {
+      url: '//localhost:3131',
+      products: 'products',
+      orders: 'orders',
+    },
   };
 
   const templates = {
@@ -571,17 +575,32 @@
   const app = {
     initData: function () {
       const thisApp = this;
-      thisApp.data = dataSource;
-      console.log('thisApp.data:', thisApp.data);
 
+      const url = settings.db.url + '/' + settings.db.products;
+
+      thisApp.data = {};
+      fetch(url)
+        .then(function (rawResponse) {
+          return rawResponse.json();
+        })
+        .then(function (parsedResponse) {
+          thisApp.data.products = parsedResponse;
+          thisApp.initMenu();
+        });
+    },
+
+    initMenu: function () {
+      const thisApp = this;
       thisApp.products = [];
       for (let productData in thisApp.data.products) {
         // add new product to thisApp.data.products array
         thisApp.products.push(
-          new Product(productData, thisApp.data.products[productData])
+          new Product(
+            thisApp.data.products[productData].id,
+            thisApp.data.products[productData]
+          )
         );
       }
-      console.log('thisApp.products:', thisApp.products);
     },
 
     initCart() {
@@ -599,7 +618,6 @@
       console.log('templates:', templates);
 
       thisApp.initData();
-
       thisApp.initCart();
     },
   };

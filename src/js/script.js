@@ -424,6 +424,16 @@
       thisCart.dom.totalNumber = thisCart.dom.wrapper.querySelector(
         select.cart.totalNumber
       );
+      thisCart.dom.form = thisCart.dom.wrapper.querySelector(select.cart.form);
+      thisCart.dom.formSubmit = thisCart.dom.wrapper.querySelector(
+        select.cart.formSubmit
+      );
+      thisCart.dom.phone = thisCart.dom.wrapper.querySelector(
+        select.cart.phone
+      );
+      thisCart.dom.address = thisCart.dom.wrapper.querySelector(
+        select.cart.address
+      );
     }
 
     toggleCart() {
@@ -469,6 +479,46 @@
 
       thisCart.update();
     }
+    sendOrder() {
+      const thisCart = this;
+      const url = settings.db.url + '/' + settings.db.orders;
+      console.log('sending order with thisCart:', thisCart);
+      // {
+      //   address: adres klienta wpisany w koszyku,
+      //   phone: numer telefonu wpisany w koszyku,
+      //   totalPrice: całkowita cena za zamówienie,
+      //   subtotalPrice: cena całkowita - koszt dostawy,
+      //   totalNumber: całkowita liczba sztuk,
+      //   deliveryFee: koszt dostawy,
+      //   products: tablica obecnych w koszyku produktów
+      // }
+      thisCart.payload = {
+        address: thisCart.dom.address.value,
+        phone: thisCart.dom.phone.value,
+        totalPrice: thisCart.totalPrice,
+        subtotalPrice: thisCart.subtotalPrice,
+        totalNumber: thisCart.totalNumber,
+        deliveryFee: thisCart.deliveryFee,
+        products: [],
+      };
+      for (let product of thisCart.products) {
+        console.log('product:', product);
+        thisCart.payload.products.push(product.getData());
+      }
+      console.log('thisCart.payload:', thisCart.payload);
+
+      const jsonPayload = JSON.stringify(thisCart.payload);
+      const options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: jsonPayload,
+      };
+      fetch(url, options).then(function (response) {
+        console.log('response:', response.json());
+      });
+    }
 
     initActions() {
       const thisCart = this;
@@ -483,6 +533,10 @@
       thisCart.dom.productList.addEventListener('remove', function (event) {
         event.preventDefault();
         thisCart.remove(event.detail.cartProduct);
+      });
+      thisCart.dom.form.addEventListener('submit', function (event) {
+        event.preventDefault();
+        thisCart.sendOrder();
       });
     }
   }
@@ -569,6 +623,18 @@
       });
       thisCartProduct.dom.element.dispatchEvent(event);
       thisCartProduct.dom.element.remove();
+    }
+    getData() {
+      //id, amount, price, priceSingle, name, params
+      const thisCartProduct = this;
+      return {
+        id: thisCartProduct.id,
+        amount: thisCartProduct.amount,
+        price: thisCartProduct.price,
+        priceSingle: thisCartProduct.priceSingle,
+        name: thisCartProduct.name,
+        params: thisCartProduct.params,
+      };
     }
   }
 

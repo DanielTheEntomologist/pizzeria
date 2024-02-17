@@ -89,6 +89,11 @@ const app = {
       );
     }
   },
+  initBooking: function () {
+    const thisApp = this;
+    const bookingWrapper = document.querySelector(select.containerOf.booking);
+    thisApp.booking = new Booking(bookingWrapper);
+  },
 
   init: function () {
     const thisApp = this;
@@ -101,6 +106,7 @@ const app = {
     thisApp.initData();
     thisApp.initPages();
     thisApp.initCart();
+    thisApp.initBooking();
   },
 };
 

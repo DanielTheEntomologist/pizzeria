@@ -1,45 +1,46 @@
 import { select, settings } from '../settings.js';
+import BaseWidget from './BaseWidget.js';
 
-export default class AmountWidget {
+export default class AmountWidget extends BaseWidget {
   constructor(amountElement) {
+    super(amountElement, settings.amountWidget.defaultValue);
+
     const thisWidget = this;
-    thisWidget.value = settings.amountWidget.defaultValue;
-    thisWidget.dom = {};
-    thisWidget.getElements(amountElement);
+
+    thisWidget.getElements();
     thisWidget.setValue(thisWidget.dom.inputElement.value);
     thisWidget.initActions();
+
     // console.log('AmountWidget:', thisWidget);
   }
-  getElements(element) {
+  getElements() {
     const thisWidget = this;
-    thisWidget.dom.element = element;
-    thisWidget.dom.increaseButton = thisWidget.dom.element.querySelector(
+    thisWidget.dom.increaseButton = thisWidget.dom.wrapper.querySelector(
       select.widgets.amount.linkIncrease
     );
-    thisWidget.dom.decreaseButton = thisWidget.dom.element.querySelector(
+    thisWidget.dom.decreaseButton = thisWidget.dom.wrapper.querySelector(
       select.widgets.amount.linkDecrease
     );
-    thisWidget.dom.inputElement = thisWidget.dom.element.querySelector(
+    thisWidget.dom.inputElement = thisWidget.dom.wrapper.querySelector(
       select.widgets.amount.input
     );
   }
-  setValue(value) {
-    const thisWidget = this;
-    const newValue = parseInt(value);
 
-    if (
-      !isNaN(newValue) &&
-      newValue != thisWidget.value &&
-      newValue >= settings.amountWidget.defaultMin &&
-      newValue <= settings.amountWidget.defaultMax
-    ) {
-      thisWidget.value = newValue;
-      thisWidget.dom.inputElement.value = thisWidget.value;
-      thisWidget.announce();
-    } else {
-      thisWidget.dom.inputElement.value = thisWidget.value;
-    }
+  parseValue(value) {
+    return parseInt(value);
   }
+  isValid(value) {
+    return (
+      !isNaN(value) &&
+      value >= settings.amountWidget.defaultMin &&
+      value <= settings.amountWidget.defaultMax
+    );
+  }
+  renderValue() {
+    const thisWidget = this;
+    thisWidget.dom.inputElement.value = thisWidget.value;
+  }
+
   initActions() {
     const thisWidget = this;
     thisWidget.dom.inputElement.addEventListener('change', function (event) {
@@ -54,12 +55,5 @@ export default class AmountWidget {
       event.preventDefault();
       thisWidget.setValue(thisWidget.value - 1);
     });
-  }
-  announce() {
-    const thisWidget = this;
-    const event = new CustomEvent('updated', {
-      bubbles: true,
-    });
-    thisWidget.dom.element.dispatchEvent(event);
   }
 }

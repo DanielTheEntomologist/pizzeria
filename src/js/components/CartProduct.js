@@ -51,7 +51,7 @@ export default class CartProduct {
     );
 
     thisCartProduct.amountWidget.setValue(thisCartProduct.amount);
-    thisCartProduct.amountWidget.dom.element.addEventListener(
+    thisCartProduct.amountWidget.dom.wrapper.addEventListener(
       'updated',
       function () {
         thisCartProduct.amount = thisCartProduct.amountWidget.value;

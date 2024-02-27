@@ -12,6 +12,7 @@ export default class Booking {
     thisBooking.render(bookingWrapper);
     thisBooking.initWidgets();
     thisBooking.getData();
+    thisBooking.initTables();
   }
   render(bookingElement) {
     const thisBooking = this;
@@ -47,6 +48,19 @@ export default class Booking {
       thisBooking.updateDOM();
     });
   }
+  initTables() {
+    const thisBooking = this;
+    // add event listener to the floor plan
+    thisBooking.dom.wrapper.addEventListener('click', function (event) {
+      event.preventDefault();
+      const clickedElement = event.target;
+      console.log('clickedElement', clickedElement);
+      if (clickedElement.classList.contains(classNames.booking.table)) {
+        thisBooking.bookTable(clickedElement);
+      }
+    });
+  }
+
   getData() {
     const thisBooking = this;
     const startDateParam = `${settings.db.dateStartParamKey}=${utils.dateToStr(
@@ -178,6 +192,9 @@ export default class Booking {
 
     for (let table of thisBooking.dom.tables) {
       let tableId = table.getAttribute(settings.booking.tableIdAttribute);
+
+      thisBooking.unselectTablesExcept();
+
       if (!isNaN(tableId)) {
         tableId = parseInt(tableId);
       }
@@ -188,6 +205,41 @@ export default class Booking {
         table.classList.add(classNames.booking.tableBooked);
       } else {
         table.classList.remove(classNames.booking.tableBooked);
+      }
+    }
+  }
+  bookTable(tableElement) {
+    const thisBooking = this;
+    const tableId = parseInt(
+      tableElement.getAttribute(settings.booking.tableIdAttribute)
+    );
+    // if table is already booked display fading red shadow and do nothing
+    if (tableElement.classList.contains(classNames.booking.tableBooked)) {
+      tableElement.style.boxShadow = '0 0 10px red';
+      setTimeout(function () {
+        tableElement.style.boxShadow = '';
+      }, 250);
+      return;
+    }
+    // if table is available book it
+    if (!tableElement.classList.contains(classNames.booking.tableSelected)) {
+      tableElement.classList.add(classNames.booking.tableSelected);
+      thisBooking.table = tableId;
+
+      // unselect all other tables
+      thisBooking.unselectTablesExcept(tableId);
+    }
+    // if table is already selected unselect it
+    else {
+      tableElement.classList.remove(classNames.booking.tableSelected);
+      thisBooking.table = null;
+    }
+  }
+  unselectTablesExcept(tableId) {
+    const thisBooking = this;
+    for (let table of thisBooking.dom.tables) {
+      if (table.getAttribute(settings.booking.tableIdAttribute) != tableId) {
+        table.classList.remove(classNames.booking.tableSelected);
       }
     }
   }

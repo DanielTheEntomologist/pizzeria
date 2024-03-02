@@ -1,6 +1,153 @@
-.homepage {
-  padding: ($base-size * 3) 0;
+// declare a mixin
+@mixin gutter($width, $height, $radius: $radius, $base-size: $base-size) {
+  margin: calc($base-size / 2);
+  height: calc($height - 2 * $base-size / 2);
+  width: calc($width - 2 * $base-size / 2);
+  border-radius: $radius;
 }
+
+.homepage {
+  padding: calc($base-size * 3) 0;
+  font-family: $font-header;
+
+  &__intro {
+    color: $color-light;
+    position: relative;
+
+    display: flex;
+    flex-wrap: wrap;
+
+    &__action {
+      position: relative;
+      width: 50%;
+      height: calc($base-size * 10);
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      @include gutter(50%, calc($base-size * 10));
+
+      &__title {
+        display: block;
+        position: relative;
+        text-align: center;
+        z-index: 1;
+      }
+
+      &__image {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: -100;
+        width: 100%;
+      }
+
+      img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+      }
+    }
+
+    &__hours {
+      background-color: $color-main;
+      width: 100%;
+      height: calc($base-size * 10);
+      @include flex(column, center, center);
+      @include gutter(100%, calc($base-size * 10));
+
+      h1 {
+        margin: 0 0 0 0;
+        font-weight: normal;
+        font-size: 3 * $base-size;
+      }
+
+      p {
+        font-weight: normal;
+        margin: 0 0 0 0;
+      }
+    }
+  }
+}
+
+.homepage__carousel {
+  position: relative;
+  background-color: $color-main;
+  overflow: hidden;
+  width: 100%;
+  height: 500px;
+  @include gutter(100%, calc($base-size * 10));
+}
+
+.homepage__gallery {
+  @include gutter(100%, calc($base-size * 10));
+}
+
+ul.homepage__gallery__tiles {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: calc($base-size * 2) 0 0 0;
+  padding: 0;
+
+  li {
+    list-style-type: none;
+    width: 32%;
+    height: auto;
+    // height: 200px;
+    // margin: 0 0 calc($base-size * 2) 0;
+    overflow: hidden;
+    position: relative;
+    @include gutter(32%, 200px, $radius, $base-size/2);
+    // object-fit: cover;
+
+    img {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+    }
+  }
+}
+
+.homepage__gallery__footer {
+  // destyle links
+  a {
+    text-decoration: none;
+    color: $color-main;
+  }
+}
+
+// .wrapper {
+//   position: relative;
+//   overflow: hidden;
+//   width: 100%;
+// }
+// .background-image {
+//   position: absolute;
+
+//   top: 50%;
+//   left: 50%;
+//   transform: translate(-50%, -50%);
+//   width: 100%;
+//   text-align: center;
+//   z-index: -1;
+// }
+// .caption {
+//   position: relative;
+//   text-align: center;
+//   z-index: 1;
+// }
+// img {
+//   width: 100%;
+//   height: auto;
+//   object-fit: cover;
+// }
 
 // .cart {
 //   position: absolute;

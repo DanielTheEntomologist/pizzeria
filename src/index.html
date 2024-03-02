@@ -16,12 +16,12 @@
       rel="stylesheet"
     />
 
-    <link
+    <!-- <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
       rel="stylesheet"
       integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
       crossorigin="anonymous"
-    />
+    /> -->
 
     <link rel="stylesheet" href="css/style.css" />
 
@@ -37,12 +37,12 @@
       defer
     ></script>
 
-    <script
+    <!-- <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
       crossorigin="anonymous"
       defer
-    ></script>
+    ></script> -->
 
     <script src="js/app.js" type="module" defer></script>
   </head>
@@ -112,28 +112,53 @@
     <div id="pages">
       <section id="home">
         <div id="homepage" class="homepage container">
-          <div class="homepage__header">
-            <div class="row">
-              <div class="col-3">
-                <h2 class="homepage__title">Welcome to Mamma Mia!</h2>
-                <p class="homepage__>description">
-                  We are a family-owned pizzeria that has been serving the best
-                  homemade Italian food for over 20 years. Our secret is simple:
-                  we use fresh ingredients, traditional recipes, and lots of
-                  love to create the most delicious pizza, pasta, and desserts
-                  you have ever tasted. We invite you to visit us and enjoy the
-                  authentic taste of Italy in every bite.
-                </p>
+          <div class="homepage__intro">
+            <div class="homepage__intro__action">
+              <h1 class="homepage__intro__action__title">ORDER ONLINE</h1>
+              <div class="homepage__intro__action__image">
+                <img src="images/pizza-1.jpg" alt="Pizza" class="" />
               </div>
-              <div class="col-5">
-                <div class="homepage__images">
-                  <img
-                    src="images/pizza-1.jpg"
-                    alt="Pizza"
-                    class="homepage__image"
-                  />
-                </div>
+            </div>
+            <div class="homepage__intro__action">
+              <div class="homepage__intro__action__image">
+                <img src="images/pizza-2.jpg" alt="Pizza" class="" />
               </div>
+              <div>
+                <h1 class="homepage__intro__action__title">BOOK A TABLE</h1>
+              </div>
+            </div>
+
+            <div class="homepage__intro__hours">
+              <h1>OPENING HOURS:</h1>
+              <p>TUE - SUN: 12PM - 22AM</p>
+            </div>
+          </div>
+          <div class="homepage__carousel"></div>
+          <div class="homepage__gallery">
+            <ul class="homepage__gallery__tiles">
+              <li class="homepage__gallery__tile">
+                <img src="images/pizza-4.jpg" alt="Gallery" />
+              </li>
+              <li class="homepage__gallery__tile">
+                <img src="images/pizza-5.jpg" alt="Gallery" />
+              </li>
+              <li class="homepage__gallery__tile">
+                <img src="images/pizza-6.jpg" alt="Gallery" />
+              </li>
+              <li class="homepage__gallery__tile">
+                <img src="images/pizza-7.jpg" alt="Gallery" />
+              </li>
+              <li class="homepage__gallery__tile">
+                <img src="images/pizza-8.jpg" alt="Gallery" />
+              </li>
+              <li class="homepage__gallery__tile">
+                <img src="images/pizza-9.jpg" alt="Gallery" />
+              </li>
+            </ul>
+            <div class="homepage__gallery__footer">
+              <a href="instagram.com"
+                ><i class="fab fa-instagram"></i> View More on instagram</a
+              >
             </div>
           </div>
         </div>

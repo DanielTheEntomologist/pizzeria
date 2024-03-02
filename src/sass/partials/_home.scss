@@ -23,15 +23,31 @@
       height: calc($base-size * 10);
       overflow: hidden;
       display: flex;
-      justify-content: center;
+      flex-direction: column;
+      // justify-content: center;
       align-items: center;
       @include gutter(50%, calc($base-size * 10));
+      transition: ease-in 1s;
 
       &__title {
         display: block;
         position: relative;
+        top: 50%;
+        margin-top: 0;
+        transform: translate(0, -50%);
         text-align: center;
         z-index: 1;
+        transition: ease-in 1s;
+      }
+      &__subtitle {
+        // display: none;
+        position: relative;
+        top: 50%;
+        text-align: center;
+        margin-top: 0;
+        margin-inline: calc(2 * $base-size);
+        z-index: 1;
+        transition: ease-in 1s;
       }
 
       &__image {
@@ -47,6 +63,14 @@
         width: 100%;
         height: auto;
         object-fit: cover;
+      }
+      &:hover &__title {
+        top: 20%;
+        margin-top: 0;
+        transform: translate(0, 0);
+      }
+      &:hover &__subtitle {
+        top: 0%;
       }
     }
 
@@ -70,6 +94,11 @@
     }
   }
 }
+
+// .homepage__intro__action:hover::after {
+//   content: 'Action is being hovered over!';
+//   color: red;
+// }
 
 .homepage__carousel {
   position: relative;
@@ -100,7 +129,7 @@ ul.homepage__gallery__tiles {
     // margin: 0 0 calc($base-size * 2) 0;
     overflow: hidden;
     position: relative;
-    @include gutter(32%, 200px, $radius, $base-size/2);
+    @include gutter(32%, 200px, $radius, $base-size / 2);
     // object-fit: cover;
 
     img {

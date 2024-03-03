@@ -39,6 +39,10 @@ export const select = {
       input: 'input[type="range"]',
       output: '.output',
     },
+    carousel: {
+      wrapper: '.owl-carousel',
+      slides: '.owl-carousel > div',
+    },
   },
   booking: {
     peopleAmount: '.people-amount',

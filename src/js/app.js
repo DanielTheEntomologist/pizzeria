@@ -2,6 +2,7 @@ import { settings, select, classNames, templates } from './settings.js';
 import Product from './components/Product.js';
 import Cart from './components/Cart.js';
 import Booking from './components/Booking.js';
+import Carousel from './components/Carousel.js';
 
 const app = {
   initData: function () {
@@ -94,6 +95,13 @@ const app = {
     const bookingWrapper = document.querySelector(select.containerOf.booking);
     thisApp.booking = new Booking(bookingWrapper);
   },
+  initCarousel: function () {
+    const thisApp = this;
+    const carouselWrapper = document.querySelector(
+      select.widgets.carousel.wrapper
+    );
+    thisApp.carousel = new Carousel(carouselWrapper);
+  },
 
   init: function () {
     const thisApp = this;
@@ -107,6 +115,7 @@ const app = {
     thisApp.initPages();
     thisApp.initCart();
     thisApp.initBooking();
+    thisApp.initCarousel();
   },
 };
 

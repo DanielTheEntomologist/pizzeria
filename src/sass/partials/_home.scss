@@ -45,10 +45,10 @@
       &__subtitle {
         // display: none;
         position: relative;
-        top: 50%;
+        top: 60%;
         text-align: center;
         margin-top: 0;
-        margin-inline: calc(2 * $base-size);
+        // margin-inline: calc(2 * $base-size);
         z-index: 1;
         transition: ease-in 1s;
       }

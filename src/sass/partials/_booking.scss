@@ -17,8 +17,8 @@
 }
 
 .booking-wrapper {
-  margin: ($base-size * 3.5) auto;
-  padding: ($base-size * 6) ($base-size * 4);
+  margin: calc($base-size * 3.5) auto;
+  padding: calc($base-size * 6) calc($base-size * 4);
   background: $color-light;
   border-bottom: 1px solid lighten($color-dark, 70%);
   border-radius: $radius;
@@ -27,22 +27,22 @@
 .booking-option-title {
   @extend .h2;
   display: block;
-  margin: 0 0 ($base-size * 2) 0;
+  margin: 0 0 calc($base-size * 2) 0;
 
   > .widget-amount {
-    margin: ($base-size * 2) 0 0 0;
+    margin: calc($base-size * 2) 0 0 0;
   }
 }
 
 .page__title {
   @extend .h1;
-  margin: 0 0 ($base-size * 4) 0;
+  margin: 0 0 calc($base-size * 4) 0;
   text-align: center;
 }
 
 .time-picker {
   @include flex(row, flex-start, space-between);
-  margin: 0 0 ($base-size * 4) 0;
+  margin: 0 0 calc($base-size * 4) 0;
 }
 
 .hour-picker {
@@ -72,8 +72,8 @@
     }
 
     &__horizontal {
-      width: ($base-size * 2);
-      height: ($base-size * 2);
+      width: calc($base-size * 2);
+      height: calc($base-size * 2);
       top: -6px;
       background: $color-dark;
     }
@@ -98,7 +98,7 @@
   width: 320px;
   height: 320px;
   border: 12px solid $color-dark;
-  margin: ($base-size * 4) auto;
+  margin: calc($base-size * 4) auto;
   background: linear-gradient(
     to right,
     #e9dfc4 0%,
@@ -120,7 +120,7 @@
     #e9dbc0 98%,
     #ebddc3 100%
   );
-  background-size: ($base-size * 3);
+  background-size: calc($base-size * 3);
   background-repeat: repeat;
 
   > * {
@@ -215,5 +215,5 @@
 
 .booking-options {
   @include flex(row, flex-start, space-between);
-  margin: ($base-size * 4) auto;
+  margin: calc($base-size * 4) auto;
 }

@@ -129,7 +129,7 @@ ul.homepage__gallery__tiles {
     // margin: 0 0 calc($base-size * 2) 0;
     overflow: hidden;
     position: relative;
-    @include gutter(32%, 200px, $radius, $base-size / 2);
+    @include gutter(32%, 200px, $radius, calc($base-size / 2));
     // object-fit: cover;
 
     img {

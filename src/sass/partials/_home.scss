@@ -18,6 +18,11 @@
     flex-wrap: wrap;
 
     &__action {
+      &,
+      a {
+        text-decoration: none;
+        color: $color-light;
+      }
       position: relative;
       width: 50%;
       height: calc($base-size * 10);

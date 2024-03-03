@@ -28,6 +28,9 @@
       align-items: center;
       @include gutter(50%, calc($base-size * 10));
       transition: ease-in 1s;
+      @media (max-width: 500px) {
+        width: 100%;
+      }
 
       &__title {
         display: block;
@@ -95,18 +98,34 @@
   }
 }
 
-// .homepage__intro__action:hover::after {
-//   content: 'Action is being hovered over!';
-//   color: red;
-// }
-
 .homepage__carousel {
   position: relative;
-  background-color: $color-main;
-  overflow: hidden;
   width: 100%;
-  height: 500px;
-  @include gutter(100%, calc($base-size * 10));
+
+  @include gutter(100%, auto);
+  margin-top: calc($base-size * 5);
+  margin-bottom: calc($base-size * 5);
+
+  &__item {
+    display: flex;
+    flex-direction: row;
+    justify-content: e;
+    img {
+      width: 33%;
+      height: auto;
+      object-fit: cover;
+      @include gutter(32%, auto);
+    }
+    &__review {
+      height: 100%;
+      margin-left: calc($base-size * 3);
+      margin-right: calc($base-size * 3);
+    }
+  }
+}
+.owl-carousel .owl-item img {
+  margin: calc($base-size / 2) !important;
+  width: calc(32% - 2 * $base-size / 2) !important;
 }
 
 .homepage__gallery {
@@ -124,13 +143,13 @@ ul.homepage__gallery__tiles {
   li {
     list-style-type: none;
     width: 32%;
+    @media (max-width: 500px) {
+      width: 48%;
+    }
     height: auto;
-    // height: 200px;
-    // margin: 0 0 calc($base-size * 2) 0;
     overflow: hidden;
     position: relative;
     @include gutter(32%, 200px, $radius, calc($base-size / 2));
-    // object-fit: cover;
 
     img {
       position: absolute;
@@ -177,189 +196,3 @@ ul.homepage__gallery__tiles {
     color: $color-main;
   }
 }
-
-// .wrapper {
-//   position: relative;
-//   overflow: hidden;
-//   width: 100%;
-// }
-// .background-image {
-//   position: absolute;
-
-//   top: 50%;
-//   left: 50%;
-//   transform: translate(-50%, -50%);
-//   width: 100%;
-//   text-align: center;
-//   z-index: -1;
-// }
-// .caption {
-//   position: relative;
-//   text-align: center;
-//   z-index: 1;
-// }
-// img {
-//   width: 100%;
-//   height: auto;
-//   object-fit: cover;
-// }
-
-// .cart {
-//   position: absolute;
-//   width: 300px; // CODE CHANGED
-//   right: 0;
-//   top: $base-size;
-//   padding: ($base-size) ($base-size * 1.5);
-//   background: $color-light;
-//   border-radius: $radius;
-//   color: $color-main;
-//   font-size: $base-size;
-//   box-shadow: 0 0 $base-size rgba(0, 0, 0, 0.2);
-//   z-index: 9999;
-
-//   &.active {
-//     .cart__content {
-//       @include accordion-open();
-//       padding: ($base-size * 1.5) 0 0 0;
-//     }
-
-//   }
-
-//   &__summary {
-//     @include flex(row, center, space-between);
-//     text-transform: uppercase;
-//     cursor: pointer;
-//   }
-
-//   &__icon {
-//     font-size: ($base-size * 2);
-//   }
-
-//   &__total-number {
-//     background: $color-main;
-//     width: 30px;
-//     height: 30px;
-//     border-radius: 50%;
-//     color: $color-light;
-//     text-align: center;
-//     line-height: 28px;
-//   }
-
-//   &__total-price {
-//     color: $color-dark;
-//   }
-
-//   &__content {
-//     @include accordion-closed();
-//     opacity: 0;
-//     animation: flipdown 0.5s ease both;
-//     color: $color-dark;
-//   }
-
-//   &__order-summary {
-//     li {
-//       @include flex(row, center, space-between);
-//     }
-
-//     .widget-amount {
-//       @include flex(column-reverse, center, space-between);
-//       margin: 0 $base-size 0 0;
-
-//       input {
-//         margin: 0;
-//         width: ($base-size * 2);
-//         height: ($base-size * 2);
-//       }
-
-//       &:hover .btn-quantity--lt {
-//         opacity: 1;
-//       }
-
-//     }
-
-//   }
-
-//   &__product { // CODE CHANGED
-//     width: 170px; // CODE CHANGED
-//   }
-
-//   // CODE ADDED START
-
-//   &__product-header {
-//     @include flex(row, center, space-between);
-//   }
-
-//   &__product-details {
-//     li {
-//       display: block;
-//       margin: 0 0 ($base-size / 4) 0;
-//       font-size: 10px;
-//       color: lighten($color-dark, 40%);
-//       text-transform: lowercase;
-//       font-style: italic;
-//       line-height: 1.3;
-//       letter-spacing: 0.5px;
-//     }
-
-//   }
-
-//   &__product-details-label {
-//     position: relative;
-//     padding: 0 ($base-size / 2) 0 0;
-//     font-weight: 700;
-
-//     &::after {
-//       position: absolute;
-//       content: ':';
-//     }
-
-//   }
-
-//   // CODE ADDED END
-
-//   &__action-buttons {
-//     @include flex(row, center, space-between);
-//     font-size: 0;
-
-//     i {
-//       font-size: 14px;
-//     }
-
-//     li {
-//       margin: 0 0 0 $base-size;
-//     }
-
-//     a {
-//       color: $color-main;
-
-//       &:hover {
-//         color: lighten($color-main, 3%);
-//       }
-
-//     }
-
-//   }
-
-//   &__order-price {
-//     margin: $base-size 0 0 0; // CODE CHANGED
-//     padding: $base-size 0;
-//     list-style-type: none;
-//     border-top: 1px solid lighten($color-dark, 70%);
-
-//     li {
-//       @include flex(row, center, space-between);
-//     }
-//   }
-
-//   &__order-confirmation {
-//     border-top: 1px solid lighten($color-dark, 70%);
-//     padding: $base-size 0 0 0;
-
-//     input, button {
-//       width: 100%;
-//       margin-bottom: ($base-size / 2);
-//     }
-
-//   }
-
-// }

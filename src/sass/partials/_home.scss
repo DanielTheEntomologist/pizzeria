@@ -28,7 +28,7 @@
       align-items: center;
       @include gutter(50%, calc($base-size * 10));
       transition: ease-in 1s;
-      @media (max-width: 500px) {
+      @media (max-width: $breakpoint-mobile) {
         width: 100%;
       }
 
@@ -143,7 +143,7 @@ ul.homepage__gallery__tiles {
   li {
     list-style-type: none;
     width: 32%;
-    @media (max-width: 500px) {
+    @media (max-width: $breakpoint-mobile) {
       width: 48%;
     }
     height: auto;

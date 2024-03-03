@@ -16,6 +16,7 @@ export default class Carousel {
   initPlugin() {
     const thisCarousel = this;
 
+    // eslint-disable-next-line no-undef
     var owl = $('.owl-carousel');
     owl.owlCarousel({
       items: 1,
@@ -27,14 +28,17 @@ export default class Carousel {
       autoplayTimeout: 5000,
       autoplayHoverPause: true,
     });
+    // eslint-disable-next-line no-undef
     $('.play').on('click', function () {
       owl.trigger('play.owl.autoplay', [5000]);
     });
+    // eslint-disable-next-line no-undef
     $('.stop').on('click', function () {
       owl.trigger('stop.owl.autoplay');
     });
 
     console.log('thisCarousel:', thisCarousel);
+    // eslint-disable-next-line no-undef
     $(document).ready(function () {
       owl.owlCarousel();
     });

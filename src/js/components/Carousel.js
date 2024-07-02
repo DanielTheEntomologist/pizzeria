@@ -17,7 +17,7 @@ export default class Carousel {
     const thisCarousel = this;
 
     // eslint-disable-next-line no-undef
-    var owl = $('.owl-carousel');
+    const owl = $('.owl-carousel');
     owl.owlCarousel({
       items: 1,
       loop: true,

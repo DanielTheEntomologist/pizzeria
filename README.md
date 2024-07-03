@@ -1,2 +1,3 @@
-version 2.4
-https://5304b767-6613-4e6e-8345-85f47edd4fed-00-n93lohzdehpw.picard.replit.dev
+[Pizzeria Site](https://polar-coast-16499-feee70de5d15.herokuapp.com/#/home)
+Pizzeria site created as One Page App with customizable orders and table booking. Multiple pages and order visualisation. Cart order that could be sent to the backend.
+Github: https://github.com/DanielTheEntomologist/pizzeria

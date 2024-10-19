@@ -151,8 +151,7 @@
   }
 }
 
-// when screen is smaller than 500px
-@media screen and (max-width: 600px) {
+@media screen and (max-width: $breakpoint-mobile) {
   .cart {
     position: relative;
     width: 100%;

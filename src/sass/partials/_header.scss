@@ -11,7 +11,7 @@
   }
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: $breakpoint-mobile) {
   .header__wrapper {
     display: flex;
     flex-direction: column;
@@ -41,7 +41,7 @@
     font-style: italic;
   }
 }
-@media screen and (max-width: 600px) {
+@media screen and (max-width: $breakpoint-mobile) {
   .logo {
     align-self: center;
   }
@@ -65,6 +65,19 @@
 
     &.active {
       background: lighten($color-dark, 75%);
+    }
+  }
+}
+
+@media screen and (max-width: $breakpoint-mobile) {
+  .main-nav {
+    width: 100%;
+    justify-content: space-evenly;
+
+    a {
+      margin-left: ($base-size);
+      margin-right: ($base-size);
+      width: 100%;
     }
   }
 }

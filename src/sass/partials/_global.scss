@@ -1,4 +1,6 @@
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
@@ -10,6 +12,7 @@ body {
   line-height: 1.7;
   font-weight: $font-normal;
   color: $color-dark;
+  min-width: 450px;
 }
 
 .container {

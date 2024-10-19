@@ -6,7 +6,13 @@
   &__wrapper {
     position: relative;
   }
+}
 
+@media screen and (max-width: 600px) {
+  .header__wrapper {
+    display: flex;
+    flex-direction: column;
+  }
 }
 
 .logo {
@@ -23,7 +29,6 @@
     span {
       font-weight: $font-bold;
     }
-
   }
 
   &__subtitle {
@@ -32,7 +37,11 @@
     font-weight: $font-light;
     font-style: italic;
   }
-
+}
+@media screen and (max-width: 600px) {
+  .logo {
+    align-self: center;
+  }
 }
 
 .main-nav {
@@ -54,7 +63,5 @@
     &.active {
       background: lighten($color-dark, 75%);
     }
-
   }
-
 }
